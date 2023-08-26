@@ -13,16 +13,26 @@ let intervalId: number | undefined = undefined;
 let paused = ref(true);
 const time = ref(workTime);
 
-function formatTime(seconds: number) {
-  const minutes = Math.floor(seconds / 60);
+function formatSeconds(seconds: number) {
   const remainingSeconds = seconds % 60;
-  return `${minutes.toString().padStart(2, "0")}:${remainingSeconds
+  return `${remainingSeconds
     .toString()
     .padStart(2, "0")}`;
 }
 
-const formattedTime = computed(() => {
-  return formatTime(time.value);
+function formatMinutes(seconds: number) {
+  const minutes = Math.floor(seconds / 60);
+  return `${minutes
+    .toString()
+    .padStart(2, "0")}`;
+}
+
+const formattedMinutes = computed(() => {
+  return formatMinutes(time.value);
+});
+
+const formattedSeconds = computed(() => {
+  return formatSeconds(time.value);
 });
 
 function play() {
@@ -53,7 +63,6 @@ function changeTime(newMinutes: number) {
   const newTime = newMinutes * 60;
   workTime = newTime;
   time.value = newTime;
-  console.log("time", time.value);
   paused.value = true;
   clearInterval(intervalId);
 }
@@ -88,7 +97,20 @@ function changeTime(newMinutes: number) {
           />
         </div>
         <div class="flex justify-center items-center">
-          <h1 class="text-6xl text-white">{{ formattedTime }}</h1>
+          <div className="grid grid-flow-col gap-5 text-center auto-cols-max">
+            <div className="flex flex-col p-2 bg-primary rounded-box text-neutral-content">
+              <span className="countdown font-mono text-5xl">
+                <span :style="`--value:${formattedMinutes};`"></span>
+              </span>
+              min
+            </div> 
+            <div className="flex flex-col p-2 bg-primary rounded-box text-neutral-content">
+              <span className="countdown font-mono text-5xl">
+                <span :style="`--value:${formattedSeconds};`"></span>
+              </span>
+              sec
+            </div>
+          </div>
         </div>
         <div class="flex justify-center items-center mt-2">
           <button
