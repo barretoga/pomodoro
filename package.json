@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@formkit/vue": "^0.18.0",
     "unplugin-vue-components": "^0.25.1",
     "vue": "^3.3.4"
   },
