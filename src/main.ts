@@ -1,5 +1,9 @@
 import { createApp } from 'vue'
-import './style.css'
+import { plugin, defaultConfig } from '@formkit/vue'
 import App from './App.vue'
 
-createApp(App).mount('#app')
+import './style.css'
+
+createApp(App)
+  .use(plugin, defaultConfig)
+  .mount('#app')
