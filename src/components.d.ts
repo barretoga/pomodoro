@@ -5,8 +5,10 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 export {}
 
-declare module "vue" {
+declare module 'vue' {
   export interface GlobalComponents {
-    Timer: typeof import("./components/Timer.vue")["default"];
+    Form: typeof import('./components/Form.vue')['default']
+    Timer: typeof import('./components/Timer.vue')['default']
+    Todo: typeof import('./components/Todo.vue')['default']
   }
 }
