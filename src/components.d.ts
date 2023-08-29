@@ -7,7 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Form: typeof import('./components/Form.vue')['default']
+    InputText: typeof import('./components/InputText.vue')['default']
     Timer: typeof import('./components/Timer.vue')['default']
     Todo: typeof import('./components/Todo.vue')['default']
   }
