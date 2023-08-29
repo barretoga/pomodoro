@@ -54,20 +54,52 @@ const handleTodoEdit = (data: any) => {
         v-if="isAnyToDoBeingEdited && editingTodo.id === todo.id"
         class="stack"
       >
-        <Form
+        <FormKit
+          type="form"
+          :actions="false"
+          :classes="{
+            form: 'w-full max-w-full min-h-[14rem] rounded bg-primary text-primary-content py-3 pt-5 pl-5',
+            message: 'max-h-6 p-0 m-0',
+          }"
           @submit="handleTodoEdit"
         >
+          <h2
+            class="text-xl mb-4 text-center"
+          >
+            Editar task
+          </h2>
+          <div
+            class="h-[4rem] pr-5 mb-2"
+          >
+            <FormKit
+              type="text"
+              name="task"
+              validation="required"
+              :value="editingTodo.text"
+              :classes="{
+                input: 'input input-bordered w-full text-black',
+                label: 'label',
+                error: 'label label-error',
+                wrapper: 'form-control',
+              }"
+            />
+          </div>
           <FormKit
-            type="text"
-            name="task"
-            placeholder="Descrição da tarefa"
-            validation="required"
-          />
-        </Form>
+            type="submit"
+            :classes="{
+              input: 'btn max-w-[10rem] min-h-[3rem]',
+              wrapper: 'form-control',
+              label: 'btn btn-primary',
+              error: 'btn btn-error',
+            }"
+          >
+            Confirmar
+          </FormKit>
+        </FormKit>
       </div>
       <div
         v-else
-        class="grid w-full max-w-full min-w-32 h-20 rounded bg-primary text-primary-content place-content-center"
+        class="grid w-full z-[3] max-w-full min-w-32 h-20 rounded bg-primary text-primary-content place-content-center"
       >
         {{todo.text}}
         <details className="dropdown mb-32 absolute right-1 top-1">
