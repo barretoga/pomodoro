@@ -41,10 +41,24 @@ const handleTodoEdit = (data: any) => {
   };
 }
 
+const createNewTodo = () => {
+  const newTodo = {
+    id: todos.list.length + 1,
+    text: '',
+    done: false
+  };
+  todos.list.push(newTodo);
+  editTodo({
+    id: newTodo.id,
+    text: newTodo.text,
+    done: newTodo.done
+  });
+}
+
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-2 w-full py-10">    
+  <div class="grid grid-cols-1 gap-2 w-full py-10 h-[33rem] overflow-y-auto">    
     <div
       v-for="todo in todos.list"
       :key="todo.text"
@@ -128,11 +142,19 @@ const handleTodoEdit = (data: any) => {
       <div class="grid w-full max-w-full min-w-32 h-20 rounded bg-secondary text-secondary-content place-content-center"/>
     </div>
     <div
-      class="stack mt-3 hover:cursor-pointer"
+      class="stack mt-3"
     >
-      <div class="flex items-center w-full max-w-[100px] h-10 rounded bg-primary text-white  hover:text-primary hover:bg-white place-content-center">
+      <button
+        class="flex items-center w-full max-w-[100px] h-10 rounded bg-primary text-white hover:text-primary hover:bg-white place-content-center"
+        :class="{
+          'opacity-50 cursor-not-allowed': isAnyToDoBeingEdited,
+          'opacity-100 cursor-pointer': !isAnyToDoBeingEdited
+        }"
+        :disabled="isAnyToDoBeingEdited"
+        @click="createNewTodo"
+      >
         <Icon icon="bx:plus" class="w-6 h-6" />
-      </div> 
+      </button> 
       <div class="grid w-full max-w-[100px] h-10 rounded bg-accent text-accent-content place-content-center"/>
       <div class="grid w-full max-w-[100px] h-10 rounded bg-secondary text-secondary-content place-content-center"/>
     </div>
