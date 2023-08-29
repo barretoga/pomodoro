@@ -20,7 +20,7 @@
         <div class="flex justify-start">
           <h2 class="text-xl text-white">To-Do</h2>
         </div>
-        <div class="flex justify-center items-center h-full">
+        <div class="flex justify-center items-center">
           <Todo />
         </div>
       </div>
